@@ -5,10 +5,13 @@
  */
 package modelo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  *
@@ -31,6 +34,30 @@ public class Utilities {
         return t;
         //printWriter.printf("Product name is %s and its price is %d $", "iPhone", 1000);
     }
+    
+        public static LinkedList<Estudiante> readFile() throws IOException {
+            LinkedList<Estudiante> le= new LinkedList<>();
+            
+            try{
+                File myObj = new File("estudiantes.txt");
+                Scanner myReader = new Scanner(myObj);
+                while(myReader.hasNextLine()){
+                    String data = myReader.nextLine();
+                if(data.equals("")){
+                    
+                }
+                    String [] arrLinea = data.split(",");
+                    le.add(new Estudiante(arrLinea[3], arrLinea[4], arrLinea[0], Integer.parseInt(arrLinea[1]), arrLinea[2]));
+   
+                }
+                myReader.close();
+            }catch(FileNotFoundException e){
+                System.out.println("El archivo no existe");
+                e.printStackTrace();
+            }
+            
+            
+        }
 
     public LinkedList<Estudiante> ordering(LinkedList<Estudiante> le) {
         LinkedList<Estudiante> lorden = new LinkedList<>();
